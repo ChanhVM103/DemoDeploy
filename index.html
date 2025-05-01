@@ -11,201 +11,145 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-umbrella-beach"></i> Địa Điểm Vũng Tàu Của Tụi Mình<3</h1>
-           
+            <h1><i class="fas fa-umbrella-beach"></i> Địa Điểm Vũng Tàu Của Tụi Mình ❤️</h1>
+            <p class="subtitle">Lưu lại những địa điểm yêu thích của chúng ta</p>
         </header>
-        
-        <div class="form-container" id="formContainer">
-            <form id="placeForm">
-                <div class="form-group">
-                    <label for="name"><i class="fas fa-map-marker-alt"></i> Tên địa điểm</label>
-                    <input type="text" id="name" placeholder="Ví dụ: Biển Back Beach" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="address"><i class="fas fa-map-pin"></i> Địa chỉ</label>
-                    <input type="text" id="address" placeholder="Ví dụ: 123 Đường Trần Phú" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="time"><i class="far fa-clock"></i> Thời gian hoạt động</label>
-                    <input type="text" id="time" placeholder="Ví dụ: 8:00 - 22:00 hàng ngày" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="category"><i class="fas fa-tag"></i> Danh mục</label>
-                    <select id="category" required>
-                        <option value="food">Ăn uống</option>
-                        <option value="drink">Quán nước</option>
-                        <option value="beach">Biển</option>
-                        <option value="entertainment">Giải trí</option>
-                        <option value="other">Khác</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="activity"><i class="fas fa-running"></i> Hoạt động</label>
-                    <textarea id="activity" rows="3" placeholder="Ví dụ: Tắm biển, chụp ảnh, ăn hải sản..." required></textarea>
-                </div>
-                
-                <button type="submit"><i class="fas fa-save"></i> Lưu địa điểm</button>
-            </form>
-        </div>
-        
+
         <div class="loader" id="loader">
             <i class="fas fa-spinner"></i>
         </div>
-        
+
         <div class="place-list" id="placeList">
-            <!-- Danh sách địa điểm sẽ được thêm bằng JavaScript -->
+            <!-- Danh sách sẽ được hiển thị ở đây -->
         </div>
-    </div>
-    
-    <div class="fab" id="fab" title="Thêm địa điểm mới">
-        <i class="fas fa-plus"></i>
-    </div>
-    
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Địa điểm đã được lưu!</span>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('placeForm');
+        const samplePlaces = [
+            {
+                id: 1,
+                name: "Đường Đồi",
+                address: "Hẻm 444 Trần Phú",
+                time: "9h",
+                activity: "Chụp Ảnh",
+                createdAt: "2025-05-01T00:00:00Z"
+            },
+            {
+                id: 2,
+                name: "Bãi đá",
+                address: "Bên cạnh mũi Nghinh Phong",
+                time: "14h",
+                activity: "Chụp Ảnh",
+                createdAt: "2025-05-01T00:00:00Z"
+            },
+            {
+                id: 3,
+                name: "SEA AND SUN 3",
+                address: "47 Trần Phú, Phường 5",
+                time: "17h",
+                activity: "Ngắm hoàng hôn",
+                createdAt: "2025-05-01T00:00:00Z"
+            },
+            {
+                id: 4,
+                name: "Nhà Trắng",
+                address: "63A Trần Phú",
+                time: "9h",
+                activity: "Chụp Ảnh",
+                createdAt: "2025-05-01T00:00:00Z"
+            },
+            {
+                id: 5,
+                name: "BÃI TRƯỚC",
+                address: "HẠ LONG",
+                time: "16h",
+                activity: "Chụp Ảnh",
+                createdAt: "2025-05-01T00:00:00Z"
+            },
+            {
+                id: 6,
+                name: "Hủ TIẾU MỰC SỮA",
+                address: "231 Trần Phú",
+                time: "2h30",
+                activity: "Ăn Uống",
+                createdAt: "2025-05-01T00:00:00Z"
+            },
+            {
+                id: 7,
+                name: "CEN HOTEL",
+                address: "74A Võ Thị Sáu, phường Thắng Tam, Vũng Tàu (Đối diện Chung Cư Melody)",
+                time: "14h",
+                activity: "Check in",
+                createdAt: "2025-05-01T00:00:00Z"
+            },
+            {
+                id: 8,
+                name: "Hải Sản Quý Mập",
+                address: "Bờ kè Phước Hải",
+                time: "14h",
+                activity: "Ăn Uống",
+                createdAt: "2025-05-01T00:00:00Z"
+            },
+            {
+                id: 9,
+                name: "Ốc Núi",
+                address: "28 Vi Ba",
+                time: "14h",
+                activity: "Ăn Uống",
+                createdAt: "2025-05-01T00:00:00Z"
+            },
+              {
+                id: 10,
+                name: "Bãi Dâu",
+                address: "",
+                time: "",
+                activity: "Chụp Ảnh",
+                createdAt: "2025-05-01T00:00:00Z"
+              },
+              {
+                id: 11,
+                name: "Dọc đường Trần Phú",
+                address: "Đường Trần Phú",
+                time: "",
+                activity: "Chụp Ảnh",
+                createdAt: "2025-05-01T00:00:00Z"
+              },
+              {
+                id: 12,
+                name: "Mũi Nghinh Phong",
+                address: "01 Hạ Long(Cổng trời đi lên)",
+                time: "",
+                activity: "Chụp Ảnh",
+                createdAt: "2025-05-01T00:00:00Z"
+              }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
             const placeList = document.getElementById('placeList');
             const loader = document.getElementById('loader');
-            const toast = document.getElementById('toast');
-            const fab = document.getElementById('fab');
-            const formContainer = document.getElementById('formContainer');
-            
-            let showForm = false;
-            
-            // Load places from localStorage
-            loadPlaces();
-            
-            // Form submission
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const place = {
-                    id: Date.now(),
-                    name: document.getElementById('name').value,
-                    address: document.getElementById('address').value,
-                    time: document.getElementById('time').value,
-                    category: document.getElementById('category').value,
-                    activity: document.getElementById('activity').value,
-                    createdAt: new Date().toISOString()
-                };
-                
-                savePlace(place);
-                form.reset();
-                showToast('Địa điểm đã được lưu!');
-                
-                // Hide form after submission if on mobile
-                if (window.innerWidth < 768) {
-                    toggleForm();
-                }
-            });
-            
-            // Floating action button
-            fab.addEventListener('click', toggleForm);
-            
-            function toggleForm() {
-                showForm = !showForm;
-                if (showForm) {
-                    formContainer.style.display = 'block';
-                    fab.innerHTML = '<i class="fas fa-times"></i>';
-                    fab.setAttribute('title', 'Đóng form');
-                    setTimeout(() => {
-                        formContainer.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
-                } else {
-                    formContainer.style.display = 'none';
-                    fab.innerHTML = '<i class="fas fa-plus"></i>';
-                    fab.setAttribute('title', 'Thêm địa điểm mới');
-                }
-            }
-            
-            // Show toast notification
-            function showToast(message) {
-                document.getElementById('toastMessage').textContent = message;
-                toast.classList.add('show');
-                
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }
-            
-            // Save place to localStorage
-            function savePlace(place) {
-                loader.style.display = 'block';
-                placeList.style.opacity = '0.5';
-                
-                setTimeout(() => {
-                    let places = JSON.parse(localStorage.getItem('vt-places')) || [];
-                    places.push(place);
-                    localStorage.setItem('vt-places', JSON.stringify(places));
-                    
-                    loadPlaces();
-                    loader.style.display = 'none';
-                    placeList.style.opacity = '1';
-                }, 500);
-            }
-            
-            // Load places from localStorage
-            function loadPlaces() {
+
+            loader.style.display = 'block';
+            placeList.style.opacity = '0.5';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                placeList.style.opacity = '1';
+                renderPlaces(samplePlaces);
+            }, 500);
+
+            function renderPlaces(places) {
                 placeList.innerHTML = '';
-                
-                const places = JSON.parse(localStorage.getItem('vt-places')) || [];
-                
-                if (places.length === 0) {
-                    placeList.innerHTML = `
-                        <div class="no-places">
-                            <i class="far fa-compass fa-3x" style="color: #bdc3c7; margin-bottom: 15px;"></i>
-                            <h3>Chưa có địa điểm nào được lưu</h3>
-                            <p>Hãy thêm địa điểm đầu tiên của bạn!</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                // Sort by newest first
+
                 places.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-                
+
                 places.forEach((place, index) => {
                     const placeItem = document.createElement('div');
                     placeItem.className = 'place-item';
                     placeItem.style.animationDelay = `${index * 0.1}s`;
-                    
-                    // Get category name and icon
-                    let categoryName, categoryIcon;
-                    switch(place.category) {
-                        case 'food':
-                            categoryName = 'Ăn uống';
-                            categoryIcon = 'fa-utensils';
-                            break;
-                        case 'drink':
-                            categoryName = 'Quán nước';
-                            categoryIcon = 'fa-glass-martini-alt';
-                            break;
-                        case 'beach':
-                            categoryName = 'Biển';
-                            categoryIcon = 'fa-umbrella-beach';
-                            break;
-                        case 'entertainment':
-                            categoryName = 'Giải trí';
-                            categoryIcon = 'fa-gamepad';
-                            break;
-                        default:
-                            categoryName = 'Khác';
-                            categoryIcon = 'fa-map-marker-alt';
-                    }
-                    
+
                     placeItem.innerHTML = `
                         <div class="place-header">
                             <h3 class="place-title">${place.name}</h3>
-                            <span class="category-tag"><i class="fas ${categoryIcon}"></i> ${categoryName}</span>
                         </div>
                         <div class="place-body">
                             <div class="place-info">
@@ -222,67 +166,18 @@
                             </div>
                             <div class="place-actions">
                                 <small>${formatDate(place.createdAt)}</small>
-                                <button onclick="deletePlace(${place.id})" class="btn-danger"><i class="fas fa-trash"></i> Xóa</button>
                             </div>
                         </div>
                     `;
                     placeList.appendChild(placeItem);
                 });
             }
-            
-            // Format date
+
             function formatDate(dateString) {
                 const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
                 return new Date(dateString).toLocaleDateString('vi-VN', options);
             }
         });
-        
-        // Delete place
-        function deletePlace(id) {
-            if (confirm('Bạn có chắc muốn xóa địa điểm này?')) {
-                let places = JSON.parse(localStorage.getItem('vt-places')) || [];
-                places = places.filter(place => place.id !== id);
-                localStorage.setItem('vt-places', JSON.stringify(places));
-                
-                document.getElementById('loader').style.display = 'block';
-                document.getElementById('placeList').style.opacity = '0.5';
-                
-                setTimeout(() => {
-                    document.querySelectorAll('.place-item').forEach(item => {
-                        if (parseInt(item.dataset.id) === id) {
-                            item.style.transform = 'scale(0.9)';
-                            item.style.opacity = '0';
-                            setTimeout(() => {
-                                item.remove();
-                                if (document.querySelectorAll('.place-item').length === 0) {
-                                    document.getElementById('placeList').innerHTML = `
-                                        <div class="no-places">
-                                            <i class="far fa-compass fa-3x" style="color: #bdc3c7; margin-bottom: 15px;"></i>
-                                            <h3>Chưa có địa điểm nào được lưu</h3>
-                                            <p>Hãy thêm địa điểm đầu tiên của bạn!</p>
-                                        </div>
-                                    `;
-                                }
-                            }, 300);
-                        }
-                    });
-                    
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('placeList').style.opacity = '1';
-                }, 500);
-                
-                // Show toast
-                const toast = document.getElementById('toast');
-                document.getElementById('toastMessage').textContent = 'Đã xóa địa điểm!';
-                toast.classList.add('show');
-                toast.style.backgroundColor = '#e74c3c';
-                
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                    toast.style.backgroundColor = '#2ecc71';
-                }, 3000);
-            }
-        }
     </script>
 </body>
 </html>
