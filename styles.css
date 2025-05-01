@@ -291,3 +291,45 @@ button i {
     transform: scale(1.1);
     background: #e05555;
 }
+.itinerary {
+    background-color: #fdfcf5;
+    border: 1px solid #f1e5be;
+    border-radius: 16px;
+    padding: 30px;
+    margin-top: 30px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.itinerary h2 {
+    font-size: 1.6rem;
+    color: #d48806;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.itinerary-block {
+    margin-bottom: 25px;
+}
+
+.itinerary-block h3 {
+    font-size: 1.3rem;
+    color: #8c6d1f;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.itinerary-block ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.itinerary-block li {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #4a3f1d;
+}
